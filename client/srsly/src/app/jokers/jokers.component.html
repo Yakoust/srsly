@@ -1,0 +1,33 @@
+<span *ngIf="!isLoading; else loader">
+<mat-list>
+  <mat-list-item *ngFor="let joker of jokers | orderByNbJoke">
+    <mat-icon mat-list-icon>account_circle</mat-icon>
+    <button mat-mini-fab color="primary" class="add-joke-button" (click)="goToAddJoke(joker._id)">
+        <mat-icon aria-label="Add a joke">add</mat-icon>
+      </button>
+    <h4 mat-line class="joker-name">{{joker.name}}</h4>
+
+    <div mat-line class="joke-emoji">
+      <span *ngIf="joker.jokes && joker.jokes.length > 0">
+        <span *ngFor="let joke of joker.jokes" [satPopoverAnchorFor]="contactPopover"
+              (mouseenter)="contactPopover.open()"
+              (mouseleave)="contactPopover.close()">🃏
+          <sat-popover #contactPopover verticalAlign="below">
+            <div class="popover">
+             <p>{{joke.date | date}}</p>
+             <h4> Joke: <br>{{joke.joke}}</h4>
+             <h4> Context <br> :{{joke.context}} </h4>
+            </div>
+          </sat-popover>
+        </span>
+      </span>
+    </div>
+  </mat-list-item>
+</mat-list>
+<button mat-fab class="add-joker" (click)="goToAddJoker()">
+  <mat-icon aria-label="Add a new joker">add</mat-icon>
+</button>
+</span>
+<ng-template #loader class="loader">
+  <mat-spinner></mat-spinner>
+</ng-template>

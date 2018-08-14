@@ -1,0 +1,13 @@
+<button mat-fab class="back" color="primary" (click)="goBack()">
+  <mat-icon aria-label="Back">arrow_back</mat-icon>
+</button>
+
+<form class="add-form" [formGroup]="jokeForm" (submit)="add()">
+  <mat-form-field class="full-width">
+    <textarea matInput placeholder="joke" required formControlName="joke"></textarea>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <textarea matInput placeholder="context" required formControlName="context"></textarea>
+  </mat-form-field>
+  <button mat-flat-button color="primary" type="submit" [disabled]="jokeForm.invalid">Add</button>
+</form>
